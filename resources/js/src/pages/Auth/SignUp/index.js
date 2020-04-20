@@ -11,18 +11,29 @@ export default function SignUp() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const [error, setError] = useState("");
 
     const history = useHistory();
 
     const handleSignUp = async e => {
         e.preventDefault();
-        if (!name || !email || !password) {
+
+        if (password !== passwordConfirmation) {
+            setError("Senhas digitadas são diferentes");
+        }
+
+        if (!name || !email || !password || !passwordConfirmation) {
             setError("Preencha todos os dados para se cadastrar");
         } else {
             try {
-                await api.post("/user", { name, email, password });
-                history.push("/app");
+                await api.post("/register", {
+                    name,
+                    email,
+                    password,
+                    password_confirmation: passwordConfirmation,
+                });
+                history.push("/");
             } catch (err) {
                 console.log(err);
                 setError("Ocorreu um erro ao registrar sua conta. T.T");
@@ -49,6 +60,11 @@ export default function SignUp() {
                     type="password"
                     placeholder="Senha"
                     onChange={e => setPassword(e.target.value)}
+                />
+                <input
+                    type="password"
+                    placeholder="Confirmar senha"
+                    onChange={e => setPasswordConfirmation(e.target.value)}
                 />
                 <button type="submit">Cadastrar</button>
                 <hr />

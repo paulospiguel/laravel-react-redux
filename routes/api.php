@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
     Route::apiResource("user", "Api\UserController");
     Route::post('sessions',"Api\SessionController@login");
+    Route::post('register',"Api\SessionController@register");
 
     Route::group(['middleware' => ['jwt.auth']], function () {
 

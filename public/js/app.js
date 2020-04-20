@@ -74836,8 +74836,13 @@ function SignUp() {
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState8 = _slicedToArray(_useState7, 2),
-      error = _useState8[0],
-      setError = _useState8[1];
+      passwordConfirmation = _useState8[0],
+      setPasswordConfirmation = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+      _useState10 = _slicedToArray(_useState9, 2),
+      error = _useState10[0],
+      setError = _useState10[1];
 
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useHistory"])();
 
@@ -74849,41 +74854,46 @@ function SignUp() {
             case 0:
               e.preventDefault();
 
-              if (!(!name || !email || !password)) {
-                _context.next = 5;
+              if (password !== passwordConfirmation) {
+                setError("Senhas digitadas são diferentes");
+              }
+
+              if (!(!name || !email || !password || !passwordConfirmation)) {
+                _context.next = 6;
                 break;
               }
 
               setError("Preencha todos os dados para se cadastrar");
-              _context.next = 15;
+              _context.next = 16;
               break;
 
-            case 5:
-              _context.prev = 5;
-              _context.next = 8;
-              return _services_api__WEBPACK_IMPORTED_MODULE_3__["default"].post("/user", {
+            case 6:
+              _context.prev = 6;
+              _context.next = 9;
+              return _services_api__WEBPACK_IMPORTED_MODULE_3__["default"].post("/register", {
                 name: name,
                 email: email,
-                password: password
+                password: password,
+                password_confirmation: passwordConfirmation
               });
 
-            case 8:
-              history.push("/app");
-              _context.next = 15;
+            case 9:
+              history.push("/");
+              _context.next = 16;
               break;
 
-            case 11:
-              _context.prev = 11;
-              _context.t0 = _context["catch"](5);
+            case 12:
+              _context.prev = 12;
+              _context.t0 = _context["catch"](6);
               console.log(_context.t0);
               setError("Ocorreu um erro ao registrar sua conta. T.T");
 
-            case 15:
+            case 16:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[5, 11]]);
+      }, _callee, null, [[6, 12]]);
     }));
 
     return function handleSignUp(_x) {
@@ -74913,6 +74923,12 @@ function SignUp() {
     placeholder: "Senha",
     onChange: function onChange(e) {
       return setPassword(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "password",
+    placeholder: "Confirmar senha",
+    onChange: function onChange(e) {
+      return setPasswordConfirmation(e.target.value);
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     type: "submit"
