@@ -19,13 +19,16 @@ use Illuminate\Support\Facades\Route;
 }); */
 
 Route::prefix('v1')->group(function () {
-    Route::apiResource("user", "Api\UserController");
-    Route::post('sessions',"Api\SessionController@login");
+    Route::post('auth/login',"Api\SessionController@login");
     Route::post('register',"Api\SessionController@register");
 
-    Route::group(['middleware' => ['jwt.auth']], function () {
+    Route::group(['middleware' => ['apiJwt']], function () {
 
-        //Route::apiResource("project", "Api\ProjectController");
+        Route::post("auth/logout", "Api\SessionController@logout");
+
+        Route::apiResource("user", "Api\UserController");
+        Route::apiResource("project", "Api\ProjectController");
+
         //Route::apiResource("task", "Api\TaskController");
     });
 

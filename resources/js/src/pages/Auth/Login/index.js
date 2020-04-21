@@ -20,12 +20,12 @@ export default function SignIn() {
             setError("Preencha e-mail e senha para continuar!");
         } else {
             try {
-                const response = await api.post("/sessions", {
+                const response = await api.post("/auth/login", {
                     email,
                     password,
                 });
-                login(response.data.token);
-                history.push("/app");
+                login(response.data.access_token);
+                history.push("/main");
             } catch (err) {
                 setError(
                     "Houve um problema com o login, verifique suas credenciais. T.T"
@@ -56,7 +56,7 @@ export default function SignIn() {
                         <input type="checkbox" />
                         <label className="checkbox ml-1">Lembrar-me</label>
                     </div>
-                    <a href="#" class="small-text">
+                    <a href="#" className="small-text">
                         Forgot password?
                     </a>
                 </div>

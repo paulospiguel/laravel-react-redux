@@ -58,6 +58,14 @@ class SessionController extends Controller
         return response()->json(compact('user','token'),201);
     }
 
+    public function logout()
+    {
+        auth('api')->logout();
+
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
+
     public function getAuthenticatedUser()
     {
         try {
