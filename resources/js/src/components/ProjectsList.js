@@ -6,14 +6,14 @@ class ProjectsList extends Component {
     constructor() {
         super();
         this.state = {
-            projects: []
+            projects: [],
         };
     }
 
     componentDidMount() {
-        axios.get("/api/projects").then(response => {
+        axios.get("/api/projects").then((response) => {
             this.setState({
-                projects: response.data
+                projects: response.data,
             });
         });
     }
@@ -34,7 +34,7 @@ class ProjectsList extends Component {
                                     Create new project
                                 </Link>
                                 <ul className="list-group list-group-flush">
-                                    {projects.map(project => (
+                                    {projects.map((project) => (
                                         <Link
                                             className="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                                             to={`/${project.id}`}

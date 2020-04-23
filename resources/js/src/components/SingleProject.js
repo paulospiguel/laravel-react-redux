@@ -6,17 +6,17 @@ class SingleProject extends Component {
         super(props);
         this.state = {
             project: {},
-            tasks: []
+            tasks: [],
         };
     }
 
     componentDidMount() {
         const projectId = this.props.match.params.id;
 
-        axios.get(`/api/projects/${projectId}`).then(response => {
+        axios.get(`/api/projects/${projectId}`).then((response) => {
             this.setState({
                 project: response.data,
-                tasks: response.data.tasks
+                tasks: response.data.tasks,
             });
         });
     }
@@ -40,7 +40,7 @@ class SingleProject extends Component {
                                 <hr />
 
                                 <ul className="list-group mt-3">
-                                    {tasks.map(task => (
+                                    {tasks.map((task) => (
                                         <li
                                             className="list-group-item d-flex justify-content-between align-items-center"
                                             key={task.id}

@@ -7,7 +7,7 @@ class NewProject extends Component {
         this.state = {
             name: "",
             description: "",
-            errors: []
+            errors: [],
         };
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.handleCreateNewProject = this.handleCreateNewProject.bind(this);
@@ -17,7 +17,7 @@ class NewProject extends Component {
 
     handleFieldChange(event) {
         this.setState({
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
         });
     }
 
@@ -28,18 +28,18 @@ class NewProject extends Component {
 
         const project = {
             name: this.state.name,
-            description: this.state.description
+            description: this.state.description,
         };
 
         axios
             .post("/api/projects", project)
-            .then(response => {
+            .then((response) => {
                 // redirect to the homepage
                 history.push("/");
             })
-            .catch(error => {
+            .catch((error) => {
                 this.setState({
-                    errors: error.response.data.errors
+                    errors: error.response.data.errors,
                 });
             });
     }
@@ -53,7 +53,7 @@ class NewProject extends Component {
             return (
                 <span className="invalid-feedback">
                     <strong>{this.state.errors[field][0]}</strong>
-                </span>
+              </span>
             );
         }
     }
@@ -61,60 +61,59 @@ class NewProject extends Component {
     render() {
         return (
             <div className="container py-4">
-                <div className="row justify-content-center">
-                    <div className="col-md-6">
+            <div className="row justify-content-center">
+                  <div className="col-md-6">
                         <div className="card">
-                            <div className="card-header">
-                                Create new project
+                        <div className="card-header">
+                    Create new project
                             </div>
                             <div className="card-body">
                                 <form onSubmit={this.handleCreateNewProject}>
-                                    <div className="form-group">
+                                <div className="form-group">
                                         <label htmlFor="name">
-                                            Project name
+                                      Project name
                                         </label>
-                                        <input
-                                            id="name"
-                                            type="text"
+                                      <input
+                                          id="name"
+                                          type="text"
                                             className={`form-control ${
-                                                this.hasErrorFor("name")
-                                                    ? "is-invalid"
-                                                    : ""
-                                            }`}
-                                            name="name"
-                                            value={this.state.name}
+                                          this.hasErrorFor('name')
+                                            ? 'is-invalid'
+                                            : ''
+                                        }`}
+                                          name="name"
+                                          value={this.state.name}
                                             onChange={this.handleFieldChange}
                                         />
-                                        {this.renderErrorFor("name")}
+                                      {this.renderErrorFor('name')}
                                     </div>
-                                    <div className="form-group">
+                                <div className="form-group">
                                         <label htmlFor="description">
-                                            Project description
+                                      Project description
                                         </label>
                                         <textarea
                                             id="description"
-                                            className={`form-control ${
-                                                this.hasErrorFor("description")
-                                                    ? "is-invalid"
-                                                    : ""
+                                      className={`form-control ${
+                                              this.hasErrorFor('description')
+                                                ? 'is-invalid'
+                                                : ''
                                             }`}
-                                            name="description"
+                                      name="description"
                                             rows="10"
-                                            value={this.state.description}
+                                      value={this.state.description}
                                             onChange={this.handleFieldChange}
-                                        />
-                                        {this.renderErrorFor("description")}
+                                    />
+                                      {this.renderErrorFor('description')}
                                     </div>
-                                    <button className="btn btn-primary">
-                                        Create
+                                <button className="btn btn-primary">
+                                      Create
                                     </button>
-                                </form>
-                            </div>
+                              </form>
+                  </div>
                         </div>
-                    </div>
+              </div>
                 </div>
-            </div>
-        );
+          </div>
     }
 }
 

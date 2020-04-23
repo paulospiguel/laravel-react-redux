@@ -3,17 +3,11 @@ module.exports = {
         browser: true,
         es6: true,
     },
-    extends: [
-        "plugin:react/recommended",
-        "airbnb",
-        "prettier",
-        "prettier/react",
-    ],
+    extends: ["airbnb", "prettier"],
     globals: {
         Atomics: "readonly",
         SharedArrayBuffer: "readonly",
     },
-    parser: "babel-eslint",
     parserOptions: {
         ecmaFeatures: {
             jsx: true,
@@ -21,29 +15,14 @@ module.exports = {
         ecmaVersion: 2018,
         sourceType: "module",
     },
-    plugins: ["react", "prettier", "react-hooks"],
+    plugins: ["react", "prettier"],
     rules: {
-        strict: 0,
         "prettier/prettier": "error",
         "react/jsx-filename-extension": [
             "warn",
             { extensions: [".jsx", ".js"] },
         ],
         "import/prefer-default-export": "off",
-        "no-unused-expressions": ["error", { allowTaggedTemplates: true }],
-        "import/no-extraneous-dependencies": "off",
-        "jsx-a11y/label-has-for": [
-            2,
-            {
-                required: {
-                    every: ["id"],
-                },
-            },
-        ],
-        camelcase: "off",
-
-        /*  "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn", */
+        "no-console": "off",
     },
 };
-/* eslint-disable jsx-a11y/label-has-associated-control */

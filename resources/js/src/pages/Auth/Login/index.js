@@ -14,7 +14,7 @@ export default function SignIn() {
 
     const history = useHistory();
 
-    const handleSignIn = async e => {
+    const handleSignIn = async (e) => {
         e.preventDefault();
         if (!email || !password) {
             setError("Preencha e-mail e senha para continuar!");
@@ -42,12 +42,12 @@ export default function SignIn() {
                 <input
                     type="email"
                     placeholder="Endereço de e-mail"
-                    onChange={e => setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                     type="password"
                     placeholder="Senha"
-                    onChange={e => setPassword(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
                 <button type="submit">Entrar</button>
                 <hr />

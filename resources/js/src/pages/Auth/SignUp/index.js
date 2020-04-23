@@ -16,7 +16,7 @@ export default function SignUp() {
 
     const history = useHistory();
 
-    const handleSignUp = async e => {
+    const handleSignUp = async (e) => {
         e.preventDefault();
 
         if (password !== passwordConfirmation) {
@@ -49,22 +49,22 @@ export default function SignUp() {
                 <input
                     type="text"
                     placeholder="Seu nome"
-                    onChange={e => setName(e.target.value)}
+                    onChange={(e) => setName(e.target.value)}
                 />
                 <input
                     type="email"
                     placeholder="Endereço de e-mail"
-                    onChange={e => setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                     type="password"
                     placeholder="Senha"
-                    onChange={e => setPassword(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
                 <input
                     type="password"
                     placeholder="Confirmar senha"
-                    onChange={e => setPasswordConfirmation(e.target.value)}
+                    onChange={(e) => setPasswordConfirmation(e.target.value)}
                 />
                 <button type="submit">Cadastrar</button>
                 <hr />
