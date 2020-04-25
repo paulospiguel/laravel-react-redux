@@ -7,7 +7,7 @@ import { isAuthenticated } from "./services/auth";
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
         {...rest}
-        render={props =>
+        render={(props) =>
             isAuthenticated() ? (
                 <Component {...props} />
             ) : (
@@ -24,9 +24,9 @@ import Login from "./pages/Auth/Login";
 
 import Main from "./pages/Main";
 
-import NewProject from "./components/NewProject";
+/* import NewProject from "./components/NewProject.js.old";
 import ProjectsList from "./components/ProjectsList";
-import SingleProject from "./components/SingleProject";
+import SingleProject from "./components/SingleProject"; */
 
 const Routes = () => (
     <BrowserRouter>

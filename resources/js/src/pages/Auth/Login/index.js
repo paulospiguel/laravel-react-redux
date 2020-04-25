@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Modal, ModalBody, Spinner, Button } from "reactstrap";
 
 import Logo from "../../../assets/logo.png";
 import api from "../../../services/api";
@@ -11,10 +13,13 @@ export default function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const loading = useSelector((state) => state.loading);
 
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const handleSignIn = async (e) => {
+        dispatch({ type: "REQUEST" });
         e.preventDefault();
         if (!email || !password) {
             setError("Preencha e-mail e senha para continuar!");
@@ -25,7 +30,12 @@ export default function SignIn() {
                     password,
                 });
                 login(response.data.access_token);
-                history.push("/main");
+                setTimeout(() => {
+                    dispatch({ type: "SIGN_IN", data: response.data });
+                    setTimeout(() => {
+                        history.push("/main");
+                    }, 500);
+                }, 2000);
             } catch (err) {
                 setError(
                     "Houve um problema com o login, verifique suas credenciais. T.T"
@@ -39,6 +49,7 @@ export default function SignIn() {
             <Form onSubmit={handleSignIn}>
                 <img src={Logo} alt="logo" />
                 {error && <p>{error}</p>}
+                {JSON.stringify(loading)}
                 <input
                     type="email"
                     placeholder="Endereço de e-mail"
@@ -49,7 +60,9 @@ export default function SignIn() {
                     placeholder="Senha"
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit">Entrar</button>
+                <Button disabled={loading} type="submit">
+                    Entrar
+                </Button>
                 <hr />
                 <div className="d-flex justify-content-between w-100 mb-5">
                     <div className="d-flex align-items-md-start">
@@ -62,6 +75,14 @@ export default function SignIn() {
                 </div>
                 <Link to="/signup">Registrar-se</Link>
             </Form>
+            <Modal isOpen={loading} centered size="sm">
+                <ModalBody>
+                    <div class="text-center m-3">
+                        <Spinner style={{ width: "3rem", height: "3rem" }} />
+                        <p className="mt-2">Loading...</p>
+                    </div>
+                </ModalBody>
+            </Modal>
         </Container>
     );
 }
