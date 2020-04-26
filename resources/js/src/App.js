@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 import "./styles/global";
+import "antd/dist/antd.css";
 
 import Routes from "./routes";
 

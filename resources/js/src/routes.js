@@ -22,7 +22,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 import SignUp from "./pages/Auth/SignUp";
 import Login from "./pages/Auth/Login";
 
-import Main from "./pages/Main";
+import Dashboard from "./pages/Dashboard";
 
 /* import NewProject from "./components/NewProject.js.old";
 import ProjectsList from "./components/ProjectsList";
@@ -34,7 +34,7 @@ const Routes = () => (
             <Route exact path="/" component={Login} />
             <Route path="/signup" component={SignUp} />
             {/* <Route path="/:id" component={SingleProject} /> */}
-            <PrivateRoute path="/main" component={Main} />
+            <PrivateRoute path="/dashboard" component={Dashboard} />
             <Route path="*" component={() => <h1>Page not found</h1>} />
         </Switch>
     </BrowserRouter>

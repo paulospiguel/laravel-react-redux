@@ -56,11 +56,16 @@ export const Form = styled.form`
     button {
         color: #fff;
         font-size: 16px;
-        background: #fc6963;
+        background: #3490dc;
         height: 56px;
         border: 0;
         border-radius: 5px;
         width: 100%;
+        transition: filter 0.5s;
+
+        &:hover {
+            filter: brightness(90%);
+        }
     }
     hr {
         margin: 20px 0;

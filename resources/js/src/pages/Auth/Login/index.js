@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal, ModalBody, Spinner, Button } from "reactstrap";
@@ -15,15 +15,17 @@ export default function SignIn() {
     const [error, setError] = useState("");
     const loading = useSelector((state) => state.loading);
 
+    const title = "SignIn";
+
     const history = useHistory();
     const dispatch = useDispatch();
 
     const handleSignIn = async (e) => {
-        dispatch({ type: "REQUEST" });
         e.preventDefault();
         if (!email || !password) {
             setError("Preencha e-mail e senha para continuar!");
         } else {
+            dispatch({ type: "REQUEST" });
             try {
                 const response = await api.post("/auth/login", {
                     email,
@@ -33,23 +35,27 @@ export default function SignIn() {
                 setTimeout(() => {
                     dispatch({ type: "SIGN_IN", data: response.data });
                     setTimeout(() => {
-                        history.push("/main");
+                        history.push("/dashboard");
                     }, 500);
                 }, 2000);
             } catch (err) {
                 setError(
                     "Houve um problema com o login, verifique suas credenciais. T.T"
                 );
+                dispatch({ type: "SIGN_IN" });
             }
         }
     };
+
+    useEffect(() => {
+        document.title = title;
+    }, []);
 
     return (
         <Container>
             <Form onSubmit={handleSignIn}>
                 <img src={Logo} alt="logo" />
                 {error && <p>{error}</p>}
-                {JSON.stringify(loading)}
                 <input
                     type="email"
                     placeholder="Endereço de e-mail"
@@ -60,7 +66,12 @@ export default function SignIn() {
                     placeholder="Senha"
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <Button disabled={loading} type="submit">
+                <Button
+                    disabled={loading}
+                    size="lg"
+                    type="submit"
+                    color="primary"
+                >
                     Entrar
                 </Button>
                 <hr />

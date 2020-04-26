@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import api from "../../../services/api";
 
 import Logo from "../../../assets/logo.png";
+
+const title = "SignUp";
 
 import { Form, Container } from "./styles";
 
@@ -40,6 +42,10 @@ export default function SignUp() {
             }
         }
     };
+
+    useEffect(() => {
+        document.title = title;
+    }, []);
 
     return (
         <Container>
