@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Modal, ModalBody, Spinner, Button } from "reactstrap";
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Modal, ModalBody, Spinner, Button } from 'reactstrap';
 
-import Logo from "../../../assets/logo.png";
-import api from "../../../services/api";
-import { login } from "../../../services/auth";
+import Logo from '../../../assets/logo.png';
+import api from '../../../services/api';
+import { login } from '../../../services/auth';
 
-import { Form, Container } from "./styles";
+import { Form, Container } from './styles';
 
 export default function SignIn() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const loading = useSelector((state) => state.loading);
 
-    const title = "SignIn";
+    const title = 'SignIn';
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -23,26 +23,26 @@ export default function SignIn() {
     const handleSignIn = async (e) => {
         e.preventDefault();
         if (!email || !password) {
-            setError("Preencha e-mail e senha para continuar!");
+            setError('Preencha e-mail e senha para continuar!');
         } else {
-            dispatch({ type: "REQUEST" });
+            dispatch({ type: 'REQUEST' });
             try {
-                const response = await api.post("/auth/login", {
+                const response = await api.post('/auth/login', {
                     email,
                     password,
                 });
                 login(response.data.access_token);
                 setTimeout(() => {
-                    dispatch({ type: "SIGN_IN", data: response.data });
+                    dispatch({ type: 'SIGN_IN', data: response.data });
                     setTimeout(() => {
-                        history.push("/dashboard");
+                        history.push('/dashboard');
                     }, 500);
                 }, 2000);
             } catch (err) {
                 setError(
-                    "Houve um problema com o login, verifique suas credenciais. T.T"
+                    'Houve um problema com o login, verifique suas credenciais. T.T'
                 );
-                dispatch({ type: "SIGN_IN" });
+                dispatch({ type: 'SIGN_IN' });
             }
         }
     };
@@ -88,8 +88,8 @@ export default function SignIn() {
             </Form>
             <Modal isOpen={loading} centered size="sm">
                 <ModalBody>
-                    <div class="text-center m-3">
-                        <Spinner style={{ width: "3rem", height: "3rem" }} />
+                    <div className="text-center m-3">
+                        <Spinner style={{ width: '3rem', height: '3rem' }} />
                         <p className="mt-2">Loading...</p>
                     </div>
                 </ModalBody>

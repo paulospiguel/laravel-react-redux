@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
-import api from "../../../services/api";
+import api from '../../../services/api';
 
-import Logo from "../../../assets/logo.png";
+import Logo from '../../../assets/logo.png';
 
-const title = "SignUp";
+import { Form, Container } from './styles';
 
-import { Form, Container } from "./styles";
+const title = 'SignUp';
 
 export default function SignUp() {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordConfirmation, setPasswordConfirmation] = useState("");
-    const [error, setError] = useState("");
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [passwordConfirmation, setPasswordConfirmation] = useState('');
+    const [error, setError] = useState('');
 
     const history = useHistory();
 
@@ -22,23 +22,23 @@ export default function SignUp() {
         e.preventDefault();
 
         if (password !== passwordConfirmation) {
-            setError("Senhas digitadas são diferentes");
+            setError('Senhas digitadas são diferentes');
         }
 
         if (!name || !email || !password || !passwordConfirmation) {
-            setError("Preencha todos os dados para se cadastrar");
+            setError('Preencha todos os dados para se cadastrar');
         } else {
             try {
-                await api.post("/register", {
+                await api.post('/register', {
                     name,
                     email,
                     password,
                     password_confirmation: passwordConfirmation,
                 });
-                history.push("/");
+                history.push('/');
             } catch (err) {
                 console.log(err);
-                setError("Ocorreu um erro ao registrar sua conta. T.T");
+                setError('Ocorreu um erro ao registrar sua conta. T.T');
             }
         }
     };

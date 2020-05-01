@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import axios from 'axios';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class ProjectsList extends Component {
     constructor() {
@@ -11,7 +11,7 @@ class ProjectsList extends Component {
     }
 
     componentDidMount() {
-        axios.get("/api/projects").then((response) => {
+        axios.get('/api/projects').then((response) => {
             this.setState({
                 projects: response.data,
             });
